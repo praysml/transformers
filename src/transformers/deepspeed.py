@@ -390,7 +390,8 @@ def deepspeed_init(trainer, num_training_steps, resume_from_checkpoint=None, inf
             logger.info(f"Attempting to resume from {resume_from_checkpoint}")
             # this magically updates self.optimizer and self.lr_scheduler
             load_path, _ = deepspeed_engine.load_checkpoint(
-                resume_from_checkpoint, load_optimizer_states=True, load_lr_scheduler_states=True
+                resume_from_checkpoint, load_optimizer_states=True, load_lr_scheduler_states=True,
+                load_module_strict=False
             )
             if load_path is None:
                 raise ValueError(f"[deepspeed] failed to resume from checkpoint {resume_from_checkpoint}")
